@@ -1,35 +1,43 @@
-class CustomStack:
+class StackWithMinMax:
     def __init__(self):
-        self.stack = []
-        self.minStack = []
-        self.maxStack = []
+        self.stack = []  # Main stack to store elements
+        self.min_stack = []  # Stack to store minimums
+        self.max_stack = []  # Stack to store maximums
 
-    def push(self, x: int):
+    def push(self, x):
         self.stack.append(x)
-        
-        # Maintain the minStack: if minStack is empty or x is smaller than or equal to the current minimum, push x.
-        if not self.minStack or x <= self.minStack[-1]:
-            self.minStack.append(x)
-        else:
-            self.minStack.append(self.minStack[-1])
-        
-        # Maintain the maxStack: if maxStack is empty or x is greater than or equal to the current maximum, push x.
-        if not self.maxStack or x >= self.maxStack[-1]:
-            self.maxStack.append(x)
-        else:
-            self.maxStack.append(self.maxStack[-1])
+        # Push to the min_stack if it's empty or x is smaller than the current min
+        if not self.min_stack or x <= self.min_stack[-1]:
+            self.min_stack.append(x)
+        # Push to the max_stack if it's empty or x is larger than the current max
+        if not self.max_stack or x >= self.max_stack[-1]:
+            self.max_stack.append(x)
 
     def pop(self):
         if self.stack:
-            self.stack.pop()
-            self.minStack.pop()
-            self.maxStack.pop()
+            popped_value = self.stack.pop()
+            # If the popped value is the current min or max, pop from their respective stacks
+            if popped_value == self.min_stack[-1]:
+                self.min_stack.pop()
+            if popped_value == self.max_stack[-1]:
+                self.max_stack.pop()
 
     def top(self):
         return self.stack[-1] if self.stack else None
 
     def getMin(self):
-        return self.minStack[-1] if self.minStack else None
+        return self.min_stack[-1] if self.min_stack else None
 
     def getMax(self):
-        return self.maxStack[-1] if self.maxStack else None
+        return self.max_stack[-1] if self.max_stack else None
+
+# Usage Example
+stack = StackWithMinMax()
+stack.push(3)
+stack.push(5)
+stack.push(2)
+print(stack.getMin())  # Output: 2
+print(stack.getMax())  # Output: 5
+stack.pop()
+print(stack.getMin())  # Output: 3
+print(stack.getMax())  # Output: 5

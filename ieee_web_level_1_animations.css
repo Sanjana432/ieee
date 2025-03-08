@@ -1,0 +1,11 @@
+/* _Level 1 - Navbar & Footer with Animations_ */
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.navbar, .footer {
+    animation: fadeIn 1s ease-in-out;
+}

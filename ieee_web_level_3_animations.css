@@ -1,0 +1,7 @@
+/* _Level 3 - Advanced Animations using GSAP_ */
+
+/* Additional animations */
+.card {
+    opacity: 0;
+    transform: translateY(30px);
+}
